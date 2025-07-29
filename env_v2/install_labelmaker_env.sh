@@ -38,6 +38,7 @@ fi
 conda create --name $env_name --yes python=$target_python_version
 eval "$(conda shell.bash hook)"
 conda activate $env_name
+conda config --set remote_read_timeout_secs 6000
 
 pip install packaging
 python $dir_name/versions.py --target_cuda_version $target_cuda_version --target_torch_version $target_torch_version --target_gcc_version $target_gcc_version
@@ -57,6 +58,7 @@ conda install -y -c anaconda openblas=0.3.20
 
 conda deactivate
 conda activate $env_name
+conda config --set remote_read_timeout_secs 6000
 
 conda_home="$(conda info | grep "active env location : " | cut -d ":" -f2-)"
 conda_home="${conda_home#"${conda_home%%[![:space:]]*}"}"

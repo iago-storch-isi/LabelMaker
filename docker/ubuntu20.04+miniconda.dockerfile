@@ -11,19 +11,19 @@ RUN apt-get update && \
     /miniconda3/bin/conda init bash && \
     chmod -R 777 /miniconda3
 RUN export PATH="/miniconda3/bin:$PATH" && conda config --set auto_activate_base false
-COPY ./.git /LabelMaker/.git
-COPY ./.gitmodules /LabelMaker/.gitmodules
-COPY ./3rdparty /LabelMaker/3rdparty
-COPY ./env_v2 /LabelMaker/env_v2
-COPY ./labelmaker /LabelMaker/labelmaker
-COPY ./scripts /LabelMaker/scripts
-COPY ./setup.py /LabelMaker/setup.py
+
+RUN export PATH="/miniconda3/bin:$PATH" && conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
+RUN export PATH="/miniconda3/bin:$PATH" && conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
+
+RUN git clone https://github.com/cvg/LabelMaker.git
 WORKDIR /LabelMaker
+RUN git checkout v2_yuchi
+
 RUN export PATH="/miniconda3/bin:$PATH" && \
-    bash env_v2/install_labelmaker_env.sh 3.9 11.3 1.12.0 9.5.0 && \
+    bash env_v2/install_labelmaker_env.sh 3.10 11.8 2.0.0 10.4.0 && \
     rm -rf /root/.cache/* && \
     chmod -R 777 /miniconda3/envs/labelmaker
-RUN export PATH="/miniconda3/bin:$PATH" && \
-    bash env_v2/install_sdfstudio_env.sh 3.10 11.3 && \
-    rm -rf /root/.cache/* && \
-    chmod -R 777 /miniconda3/envs/sdfstudio
+#RUN export PATH="/miniconda3/bin:$PATH" && \
+#    bash env_v2/install_sdfstudio_env.sh 3.10 11.3 && \
+#    rm -rf /root/.cache/* && \
+#    chmod -R 777 /miniconda3/envs/sdfstudio

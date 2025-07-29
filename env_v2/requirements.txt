@@ -5,6 +5,8 @@ gin-config
 ipykernel
 pytest
 
+transformers==4.30.2
+
 gdown # for downloading checkpoints
 
 # ARKitScenes

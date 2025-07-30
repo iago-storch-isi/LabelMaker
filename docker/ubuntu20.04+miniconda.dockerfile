@@ -15,7 +15,7 @@ RUN export PATH="/miniconda3/bin:$PATH" && conda config --set auto_activate_base
 RUN export PATH="/miniconda3/bin:$PATH" && conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
 RUN export PATH="/miniconda3/bin:$PATH" && conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
 
-RUN git clone https://github.com/cvg/LabelMaker.git
+RUN git clone https://github.com/iago-storch-isi/LabelMaker.git
 WORKDIR /LabelMaker
 RUN git checkout v2_yuchi
 
@@ -23,7 +23,7 @@ RUN export PATH="/miniconda3/bin:$PATH" && \
     bash env_v2/install_labelmaker_env.sh 3.10 11.8 2.0.0 10.4.0 && \
     rm -rf /root/.cache/* && \
     chmod -R 777 /miniconda3/envs/labelmaker
-#RUN export PATH="/miniconda3/bin:$PATH" && \
-#    bash env_v2/install_sdfstudio_env.sh 3.10 11.3 && \
-#    rm -rf /root/.cache/* && \
-#    chmod -R 777 /miniconda3/envs/sdfstudio
+RUN export PATH="/miniconda3/bin:$PATH" && \
+    bash env_v2/install_sdfstudio_env.sh 3.10 11.3 && \
+    rm -rf /root/.cache/* && \
+    chmod -R 777 /miniconda3/envs/sdfstudio

@@ -3,7 +3,8 @@ WORKDIR /
 ENV TZ=Europe/Zurich
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ >/etc/timezone
 RUN apt-get update && \
-    apt-get -y install git curl wget make nano ffmpeg libsm6 libxext6 unzip && \
+    apt-get -y install python3.10 git curl wget make nano ffmpeg libsm6 libxext6 unzip && \
+    python -m pip install --upgrade pip && \
     wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
     chmod +x /Miniconda3-latest-Linux-x86_64.sh && \
     /Miniconda3-latest-Linux-x86_64.sh -b -p /miniconda3 && \

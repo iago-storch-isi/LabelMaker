@@ -72,20 +72,17 @@ def get_args():
     defaults = dict(
         project="teste_iago/teste",
         task="ARKitLabelMaker run - {command}",
-        docker="10.167.1.54/apt/arkit-labelmaker-20.04:v0.1",
+        docker="10.167.1.54/apt/arkit-labelmaker:v0.1",
         docker_arguments="--shm-size=64000mb -e MKL_SERVICE_FORCE_INTEL=1",
         docker_setup_bash_script=[
             "echo '[!] INITIALIZE SETUP BASH SCRIPT'",
-            # "export 'CLEARML_AGENT_SKIP_PIP_VENV_INSTALL=/opt/conda/bin/python'",
-            "export PATH='/miniconda3/bin:/usr/bin:$PATH'",
-            "apt-get update  && apt-get install -y git ninja-build libsparsehash-dev xvfb",
-            "pip install clearml-agent",
-            "pwd",
-            "ls",
-            "source activate base && conda info --envs && conda init bash && conda activate labelmaker && conda info --envs",
-            "echo 'CMD>> ls /' && ls -la /",
-            "echo 'CMD>> ls -la /root/.clearml/' && ls -la /root/.clearml/",
-            "pip install clearml-agent",
+            "export 'CLEARML_AGENT_SKIP_PIP_VENV_INSTALL=/miniconda3/bin/python'",
+            "export PATH='/miniconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin/bin:$PATH'",
+            "echo PATH && echo $PATH",
+            "echo PYTHONPATH && echo $PYTHONPATH",
+            "echo PYTHONHOME && echo $PYTHONHOME",
+            "python --version",
+            "conda --version",
             "echo '[!] FINISH SETUP BASH SCRIPT'",
         ],
         local=False,
@@ -311,7 +308,7 @@ def main(args):
     )
     
     
-    task.set_packages(Path(requirements_path).read_text().splitlines())
+    # task.set_packages(Path(requirements_path).read_text().splitlines())
 
 
 
